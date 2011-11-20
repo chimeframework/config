@@ -16,12 +16,16 @@ func NewFileLocator(paths []string) *FileLocator {
 	return &FileLocator{paths: paths}
 }
 
-func (this *FileLocator) LocateAll(name string, currentPath *string) []string {
-	return this.locate(name, currentPath, false)
+func (this *FileLocator) LocateAll(name string) []string {
+	return this.locate(name, nil, false)
 }
 
-func (this *FileLocator) LocateFirst(name string, currentPath *string) []string {
-	return this.locate(name, currentPath, true)
+func (this *FileLocator) LocateFirst(name string) []string {
+	return this.locate(name, nil, true)
+}
+
+func (this *FileLocator) LocateFirstFrom(name string, currentPath string) []string {
+	return this.locate(name, &currentPath, true)
 }
 
 func (this *FileLocator) locate(name string, curr *string, first bool) []string {
